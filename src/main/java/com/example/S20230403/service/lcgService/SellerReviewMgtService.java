@@ -7,16 +7,16 @@ import com.example.S20230403.model.Review;
 
 public interface SellerReviewMgtService {
 
-	List<Review> getMyReviews(Review review);
+	List<Review> findMyReviewListByBizId(Review review);
 
-	List<Accom> getMyAccoms(String sellerUser_id);
+	List<Accom> findMyAccomListBySellerUserId(String sellerUser_id);
 
-	int updateReviewDelRequestByPayId(Review review);
+	int modifyReviewDelRequestByPayId(Review review);
 
-	Review getMyReviewConut(String biz_id);
+	Review findMyReviewConutByBizId(String biz_id);
 
 	// ajax 
-	List<Review> cgGetAjaxSortingReviewLists(Review review);
+	List<Review> cgFindAjaxSortingReviewListsByBizIdAndKind(Review review);
 	
 
 	

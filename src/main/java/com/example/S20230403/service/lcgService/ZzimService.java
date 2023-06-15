@@ -7,15 +7,15 @@ import com.example.S20230403.model.Zzim;
 
 public interface ZzimService {
 	// 찜하기
-	int cgAjaxInsertZzim(Zzim zzim);
+	int cgAjaxAddZzim(Zzim zzim);
 	// 찜 삭제
-	int cgAjaxDeleteZzim(Zzim zzim);
+	int cgAjaxRemoveZzimByUserId(Zzim zzim);
 	
 	// 찜 리스트 가져오기 
-	List<Accom> getMyAccomZzimListsByUser_id(String user_id);
+	List<Accom> findMyAccomZzimListsByUser_id(String user_id);
 	
 	
-	List<Accom> getAjaxMyAccomZzimListsByUser_id(String user_id);
+	List<Accom> findAjaxMyAccomZzimListsByUser_id(String user_id);
 
 
 }

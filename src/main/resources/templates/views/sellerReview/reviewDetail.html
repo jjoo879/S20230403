@@ -120,7 +120,7 @@
 							  <div class="modal-dialog">
 							    <div class="modal-content">
 							    <!-- textarea태그에  유효성 검사를 하기 위해 form에도 인덱스를 넣어준다. th:onsubmit="'return chk(' + ${status.index} + ')'".  -->
-							     <form th:action="@{/biz/reviewDeleteRequest}" method="post" name="frm" th:onsubmit="'return chk(' + ${status.index} + ')'">
+							     <form th:action="@{/biz/review/delete-request}" method="post" name="frm" th:onsubmit="'return chk(' + ${status.index} + ')'">
 								      <div class="modal-header">
 								        <h1 class="modal-title fs-5" id="staticBackdropLabel">리뷰삭제요청</h1>
 								        <span id="modal-notice">(리뷰삭제는 관리자가 판단하고 삭제하므로 5일 이상 소요됩니다.)</span>

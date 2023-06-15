@@ -16,8 +16,9 @@ function cgAjaxInsertZzim(biz_id, user_id, auth, index){
 	}
 	// insert 하는 ajax
 	$.ajax({
-		url : "/cgAjaxInsertZzim",
+		url : "/productList/myzzim",
 		dataType : "json",
+		type : "POST",
 		data : { 
 			"biz_id" : biz_id,
 			"user_id" : user_id,
@@ -50,8 +51,9 @@ function cgAjaxDeleteZzim(biz_id, user_id, auth, index){
 	
 	// insert 하는 ajax
 	$.ajax({
-		url : "/cgAjaxDeletetZzim",
+		url : "/productList/myzzim/"+user_id,
 		dataType : "json",
+		type : "DELETE",
 		data : { 
 			"biz_id" : biz_id,
 			"user_id" : user_id,

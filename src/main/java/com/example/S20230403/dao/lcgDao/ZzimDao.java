@@ -11,16 +11,13 @@ public interface ZzimDao {
 	int cgAjaxInsertZzim(Zzim zzim);
 	
 	// 찜삭제
-	int cgAjaxDeleteZzim(Zzim zzim);
-	
-	// 상세숙소 페이지에서 찜한거 안한거 구분하기
-	List<Zzim> getMyZzim(String user_id);
+	int cgAjaxDeleteZzimByUserId(Zzim zzim);
 	
 	// 유저 마이페이지에서 찜한 숙소만 가져오기 
-	List<Accom> getMyAccomZzimListsByUser_id(String user_id);
+	List<Accom> selectMyAccomZzimListsByUser_id(String user_id);
 	
 	// 유저 마이페이지에서 찜한 숙소 이미지만 가져오기 
-	List<Room_Img> getMyZzimAccomImgsByUser_id(String user_id);
+	List<Room_Img> selectMyZzimAccomImgListByUser_id(String user_id);
 
 
 }

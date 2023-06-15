@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.S20230403.ChanJoinMapper">
-	<select id="cgGetAjaxProductListsByAccomtypeAndAddr" parameterType="ChanJoin" resultType="ChanJoin">
+	<select id="cgSelectAjaxProductListsByAccomtypeAndAddr" parameterType="ChanJoin" resultType="ChanJoin">
 	
 			SELECT a.biz_id, a.biz_name, a.addr, r.min_price_r2 , room_resv_pay_re.avg_rating 
 			FROM    accom a
@@ -44,25 +44,51 @@
 		AND   a.accom_avail = 210
 		AND   r.biz_id_r2 = room_resv_pay_re.biz_id
 		<if test="accom_type != null and accom_type != ''">
-	    AND   a.accom_type in
-	    	<foreach item="accom_type" index="index" collection="accom_type.split(',')" open="(" separator="," close=")">
-	    		#{accom_type} 
-	    	</foreach>
+		    AND   a.accom_type in
+		    	<foreach item="accom_type" index="index" collection="accom_type.split(',')" open="(" separator="," close=")">
+		    		#{accom_type} 
+		    	</foreach>
 	    </if>
-		AND   a.pool 		= COALESCE(#{pool}, a.pool) 
-	    AND   a.parking 	= COALESCE(#{parking}, a.parking) 
-	    AND   a.cafe 		= COALESCE(#{cafe}, a.cafe) 
-	    AND   a.restaurant 	= COALESCE(#{restaurant}, a.restaurant) 
-	    AND   a.store 		= COALESCE(#{store}, a.store) 
-	    AND   a.laundry 	= COALESCE(#{laundry}, a.laundry) 
-	    AND   a.fitness 	= COALESCE(#{fitness}, a.fitness)
-	    AND   a.sauna 		= COALESCE(#{sauna}, a.sauna)
-	    AND	  a.addr		like  '%' || #{addr} || '%'	
+	    <if test="pool != null and pool != ''">
+			AND   a.pool 		= #{pool} 
+	    </if>
+	    <if test="parking != null and parking != ''">
+	    	AND   a.parking 	= #{parking}
+	    </if>
+	    <if test="cafe != null and cafe != ''">
+	    	AND   a.cafe 	= #{cafe}
+	    </if>
+	    <if test="restaurant != null and restaurant != ''">
+	    	AND   a.restaurant 	= #{restaurant}
+	    </if>
+	    <if test="store != null and store != ''">
+	    	AND   a.store 	= #{store}
+	    </if>
+	    <if test="laundry != null and laundry != ''">
+	    	AND   a.laundry 	= #{laundry}
+	    </if>
+	    <if test="fitness != null and fitness != ''">
+	    	AND   a.fitness 	= #{fitness}
+	    </if>
+	    <if test="sauna != null and sauna != ''">
+	    	AND   a.sauna 	= #{sauna}
+	    </if>
+	    <if test="addr != null and addr != ''">
+	    	AND	  a.addr		like  '%' || #{addr} || '%'	
+	    </if>
 		AND   r.r_capacity >= #{r_capacity}
-	    AND   r.bath		= COALESCE(#{bath}, r.bath)
-	    AND   r.wifi		= COALESCE(#{wifi}, r.wifi)
-	    AND   r.ac			= COALESCE(#{ac}, r.ac)
-	    AND   r.tv			= COALESCE(#{tv}, r.tv)
+	    <if test="bath != null and bath != ''">
+	    	AND	  r.bath	= #{bath}
+	    </if>
+	    <if test="wifi != null and wifi != ''">
+	    	AND	  r.wifi	= #{wifi}
+	    </if>
+	    <if test="ac != null and ac != ''">
+	    	AND	  r.ac	= #{ac}
+	    </if>
+	    <if test="tv != null and tv != ''">
+	    	AND	  r.tv	= #{tv}
+	    </if>
 		<if test="bed_type != null and bed_type != ''">
 	    AND   r.bed_type_r2 in
 	    	<foreach item="bed_type" index="index" collection="bed_type.split(',')" open="(" separator="," close=")">

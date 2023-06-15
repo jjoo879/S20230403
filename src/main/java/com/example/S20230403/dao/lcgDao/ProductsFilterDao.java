@@ -12,21 +12,22 @@ import com.example.S20230403.model.ChanJoin;
 public interface ProductsFilterDao {
 	
 	// 리펙토링 숙소 종류로 가져오기
-	List<Accom> cgGetProductByAccomtype(String accom_type);
-
-	List<Room_Img> cgGetRoom_img();
+	List<Accom> cgSelectProductListByAccomtype(String accom_type);
+	
+	// 썸네일 이미지를 가져오기
+	List<Room_Img> cgSelectRoom_imgList();
 
 	// 주소로 가져오기
 
-	List<Accom> cgGetProductListsByAddr(Accom accom);
+	List<Accom> cgSelectProductListsByAddr(Accom accom);
 
 	
 	// ajax에서 사용
 	
-	List<ChanJoin> cgGetAjaxProductListsByAccomtypeAndAddr(ChanJoin chanJoin);
+	List<ChanJoin> cgSelectAjaxProductListsByAccomtypeAndAddr(ChanJoin chanJoin);
 
 	// 찜목록 가져오기
-	List<Zzim> getZzimLists(String user_id);
+	List<Zzim> cgSelectZzimListsByUser_id(String user_id);
 	
 		
 

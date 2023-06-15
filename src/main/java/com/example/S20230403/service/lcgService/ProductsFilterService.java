@@ -11,16 +11,16 @@ public interface ProductsFilterService {
 	
 
 	// 리펙토링
-	List<Accom> cgGetProductByAccomtype(Accom accom);
+	List<Accom> cgFindProductListByAccomtype(Accom accom);
 
 	
 	// 주소로 찾기 
 
-	List<Accom> cgGetProductListsByAddr(Accom accom);
+	List<Accom> cgFindProductListsByAddr(Accom accom);
 
 	
 	// ajax에서 사용하는 거
-	List<ChanJoin> cgGetAjaxProductListsByAccomtypeAndAddr(ChanJoin chanJoin);
+	List<ChanJoin> cgFindAjaxProductListsByAccomtypeAndAddr(ChanJoin chanJoin);
 	
 
 

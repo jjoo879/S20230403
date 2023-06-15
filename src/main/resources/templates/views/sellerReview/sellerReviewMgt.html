@@ -74,7 +74,7 @@
 		    <tbody th:each="myAccoms : ${myAccoms}">
 		      <tr>
 		        <th scope="row" style="text-align: center;">
-		        	<a id="reviewDetailBtn" th:href="@{'/biz/reviewDetail?biz_id=' + ${myAccoms.biz_id}}" >
+		        	<a id="reviewDetailBtn" th:href="@{/biz/review/detail/biz-id/{biz_id}(biz_id=${myAccoms.biz_id})}" >
 		        		<span th:text="${myAccoms.biz_name}" ></span>
 		        	</a>
 		        </th>

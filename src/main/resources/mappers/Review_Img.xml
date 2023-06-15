@@ -25,7 +25,7 @@
 	</select>
 	
 	<!-- 찬규 -->
-	<select id="getReviewImgs" parameterType="int" resultType="Review_Img">
+	<select id="selectReviewImgListByPayId" parameterType="int" resultType="Review_Img">
 		SELECT pay_id, review_img
 		FROM review_img
 		WHERE pay_id = #{pay_id}

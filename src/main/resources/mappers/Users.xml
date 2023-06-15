@@ -47,7 +47,7 @@
     </delete>
     
     <!-- 찬규 -->
-    <select id="getUserNicknames" parameterType="java.lang.String" resultType="Users">
+    <select id="selectUserNicknameDetailByUserId" parameterType="java.lang.String" resultType="Users">
 		SELECT u.user_id, u.nickname
 		FROM users u
 		WHERE u.user_id = #{user_id}

@@ -7,13 +7,13 @@
       	VALUES(#{user_id}, #{biz_id}, 'Y', SYSDATE)
 	</insert>
 	
-	<select id="getZzimLists" parameterType="java.lang.String" resultType="Zzim">
+	<select id="cgSelectZzimListsByUser_id" parameterType="java.lang.String" resultType="Zzim">
 		SELECT 	biz_id, user_id, zzim_status
 		FROM 	zzim
 		WHERE	user_id = #{user_id}
 	</select>
 	
-	<delete id="cgAjaxDeleteZzim" parameterType="Zzim">
+	<delete id="cgAjaxDeleteZzimByUserId" parameterType="Zzim">
 		DELETE 
 		FROM  zzim
 		WHERE user_id = #{user_id}

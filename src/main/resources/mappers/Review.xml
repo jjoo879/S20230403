@@ -28,7 +28,7 @@
 	</select>
 	
 	<!-- 찬규 -->
-	<select id="getMyReviews" parameterType="Review" resultType="Review">
+	<select id="selectMyReviewListByBizId" parameterType="Review" resultType="Review">
 		SELECT  p.biz_id,p.r_id, p.user_id, re.review_content, re.rating, re.review_date, re.del_request ,p.pay_id
 		FROM    reservation resv, payment p, review re
 		WHERE   resv.biz_id = p.biz_id
@@ -59,7 +59,7 @@
 		WHERE 	pay_id = #{pay_id}
 	</select>
 	
-	<select id="getMyReviewConut" parameterType="java.lang.String" resultType="Review">
+	<select id="selectMyReviewConutByBizId" parameterType="java.lang.String" resultType="Review">
 		SELECT  COUNT(*) totalReview, p.biz_id
 		FROM    review re, payment p
 		WHERE   re.pay_id = p.pay_id
@@ -68,7 +68,7 @@
 	</select>
 	
 	<!--ajax  -->
-	<select id="cgGetAjaxSortingReviewLists" parameterType="Review" resultType="Review">
+	<select id="cgSelectAjaxSortingReviewListsByBizIdAndKind" parameterType="Review" resultType="Review">
 		SELECT  p.biz_id,p.r_id, p.user_id, re.review_content, re.rating, re.review_date, re.del_request, p.pay_id
 		FROM    reservation resv, payment p, review re
 		WHERE   resv.biz_id = p.biz_id

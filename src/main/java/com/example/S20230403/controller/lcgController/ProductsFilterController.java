@@ -62,7 +62,7 @@ public class ProductsFilterController {
 		// id를 세팅하는 이유는 서비스에 가서 로그인한 아이디 값으로 zzim 목록을 가져오기 위함
 		// 그리고 zzim 리스트의 user_id와 로그인한 아이디 값이 일치했을 때 accom모델에 있는 zzim_status에 Y라는 값을 넣기 위함. 서비스 딴 참고.
 		accom.setUser_id(user_id);
-		List<Accom> cgProductLists = service.cgGetProductByAccomtype(accom);
+		List<Accom> cgProductLists = service.cgFindProductListByAccomtype(accom);
 		
 		// accom_type이 호텔들이면 호텔페이지로 넘어가게 했음.
 		// 페이지를 나누는 이유는 ajax 작동방식이 다르고 필터바 내용도 다르기 때문
@@ -89,13 +89,13 @@ public class ProductsFilterController {
 		
 	
 	// 모텔, 게하, 펜션  지역별로 리스트 뽑아오기
-	@GetMapping("cgProductListsByAddr")
-	public String cgGetProductListsByAddr(@AuthenticationPrincipal PrincipalDetail userDetail,
-										  @RequestParam("accom-type") String accom_type,
-									   	  @RequestParam("addr") String addr,
-									   	  Accom accom,
-									   	  Model model) {
-		
+	@GetMapping("cgProductLists/accom-type/{accom-type}/addr/{addr}")
+	public String cgProductListsByAddr(@AuthenticationPrincipal PrincipalDetail userDetail,
+									   @PathVariable("accom-type") String accom_type,
+								   	   @PathVariable("addr") String addr,
+								   	   Accom accom,
+								   	   Model model) {
+	
 		log.info("컨트롤러 cgProductListsByAddr 시작");
 		
 		// userDetail에 있는 정보를 넣을 필드를 초기화 함.
@@ -122,7 +122,7 @@ public class ProductsFilterController {
 		accom.setAccom_type(accom_type);
 		accom.setAddr(addr);
 		
-		List<Accom> cgProductListsByAddr = service.cgGetProductListsByAddr(accom);
+		List<Accom> cgProductListsByAddr = service.cgFindProductListsByAddr(accom);
 		
 		log.info("컨트롤러 cgProductListsByAddr getAccom_type -> {} ", accom.getAccom_type());
 		log.info("컨트롤러 cgProductListsByAddr addr-> {} ", accom.getAddr());

@@ -16,28 +16,28 @@
 	<div class="cgContainer" th:with="user_id=${user_id}, auth=${auth}, accom=${accom_type} , addr=${addr}">
 		<div class="cgFilter_wrap">
 			<div class = "cgSelectAccom_type">
-				<button type="button" class="btn btn-outline-primary" id= "directoryBtn" name="motelBtn" onclick="location.href='/cgProductLists?accom-type=520'">모텔</button>
-				<button type="button" class="btn btn-outline-primary" id= "directoryBtn" name="hotelBtn" onclick="location.href='/cgProductLists?accom-type=511,513,514,515'">호텔</button>
-				<button type="button" class="btn btn-outline-primary" id= "directoryBtn" name="pensionBtn" onclick="location.href='/cgProductLists?accom-type=540'">팬션</button>
-				<button type="button" class="btn btn-outline-primary" id= "directoryBtn" name="gehaBtn" onclick="location.href='/cgProductLists?accom-type=530'">게하</button>
+				<button type="button" class="btn btn-outline-primary" id= "directoryBtn" name="motelBtn" onclick="location.href='/cgProductLists/accom-type/520'">모텔</button>
+				<button type="button" class="btn btn-outline-primary" id= "directoryBtn" name="hotelBtn" onclick="location.href='/cgProductLists/accom-type/511,513,514,515'">호텔</button>
+				<button type="button" class="btn btn-outline-primary" id= "directoryBtn" name="pensionBtn" onclick="location.href='/cgProductLists/accom-type/540'">팬션</button>
+				<button type="button" class="btn btn-outline-primary" id= "directoryBtn" name="gehaBtn" onclick="location.href='/cgProductLists/accom-type/530'">게하</button>
 			<p>
 			</div>
 			<div class = "cgSearchLocationFilter">
 					<input type="hidden" name="addr" id="addr" value="">
 					<ul class="menu">
 			      <li>
-			        <a th:href="@{/cgProductListsByAddr(accom-type=${accom}, addr=서울)}">서울</a>
+			        <a th:href="@{/cgProductLists/accom-type/{accom-type}/addr/{addr}(accom-type=${accom}, addr=서울)}">서울</a>
 			        <ul class="submenu">
-			          <li><a th:href="@{/cgProductListsByAddr(accom-type=${accom}, addr=용산)}">용산/이태원/서울역</a></li>
-			          <li><a th:href="@{/cgProductListsByAddr(accom-type=${accom}, addr=서초)}">서초/교대</a></li>
-			          <li><a th:href="@{/cgProductListsByAddr(accom-type=${accom}, addr=송파)}">잠실/송파</a></li>
-			          <li><a th:href="@{/cgProductListsByAddr(accom-type=${accom}, addr=중구)}">시청/을지로</a></li>
-			          <li><a th:href="@{/cgProductListsByAddr(accom-type=${accom}, addr=영등포)}">영등포/여의도</a></li>
-			          <li><a th:href="@{/cgProductListsByAddr(accom-type=${accom}, addr=양천)}">목동/신월동</a></li>
-			          <li><a th:href="@{/cgProductListsByAddr(accom-type=${accom}, addr=광진)}">중곡/구의</a></li>
-			          <li><a th:href="@{/cgProductListsByAddr(accom-type=${accom}, addr=동대문)}">청량리/신설동</a></li>
-			          <li><a th:href="@{/cgProductListsByAddr(accom-type=${accom}, addr=마포)}">신촌/홍대/연남</a></li>
-			          <li><a th:href="@{/cgProductListsByAddr(accom-type=${accom}, addr=종로)}">종로/종각/익선</a></li>
+			          <li><a th:href="@{/cgProductLists/accom-type/{accom-type}/addr/{addr}(accom-type=${accom}, addr=용산)}">용산/이태원/서울역</a></li>
+			          <li><a th:href="@{/cgProductLists/accom-type/{accom-type}/addr/{addr}(accom-type=${accom}, addr=서초)}">서초/교대</a></li>
+			          <li><a th:href="@{/cgProductLists/accom-type/{accom-type}/addr/{addr}(accom-type=${accom}, addr=송파)}">잠실/송파</a></li>
+			          <li><a th:href="@{/cgProductLists/accom-type/{accom-type}/addr/{addr}(accom-type=${accom}, addr=중구)}">시청/을지로</a></li>
+			          <li><a th:href="@{/cgProductLists/accom-type/{accom-type}/addr/{addr}(accom-type=${accom}, addr=영등포)}">영등포/여의도</a></li>
+			          <li><a th:href="@{/cgProductLists/accom-type/{accom-type}/addr/{addr}(accom-type=${accom}, addr=양천)}">목동/신월동</a></li>
+			          <li><a th:href="@{/cgProductLists/accom-type/{accom-type}/addr/{addr}(accom-type=${accom}, addr=광진)}">중곡/구의</a></li>
+			          <li><a th:href="@{/cgProductLists/accom-type/{accom-type}/addr/{addr}(accom-type=${accom}, addr=동대문)}">청량리/신설동</a></li>
+			          <li><a th:href="@{/cgProductLists/accom-type/{accom-type}/addr/{addr}(accom-type=${accom}, addr=마포)}">신촌/홍대/연남</a></li>
+			          <li><a th:href="@{/cgProductLists/accom-type/{accom-type}/addr/{addr}(accom-type=${accom}, addr=종로)}">종로/종각/익선</a></li>
 			        </ul>
 			      </li>
 			      <li>

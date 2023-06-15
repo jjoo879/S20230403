@@ -1,4 +1,4 @@
-//찜버튼 로직
+	//찜버튼 로직
 	function cgAjaxInsertZzim(biz_id, user_id, auth, index){
 		//alert("찜버튼 시작");
 		//alert("index -> "+index);
@@ -16,8 +16,9 @@
 		}
 		// insert 하는 ajax
 		$.ajax({
-			url : "/cgAjaxInsertZzim",
+			url : "/productList/myzzim",
 			dataType : "json",
+			type : "POST",
 			data : { 
 				"biz_id" : biz_id,
 				"user_id" : user_id,
@@ -50,8 +51,9 @@
 		
 		// insert 하는 ajax
 		$.ajax({
-			url : "/cgAjaxDeletetZzim",
+			url : "/productList/myzzim/"+user_id,
 			dataType : "json",
+			type : "DELETE",
 			data : { 
 				"biz_id" : biz_id,
 				"user_id" : user_id,
@@ -167,14 +169,7 @@
 	 bedTypes = [310, 320, 330];
 	}
 
-	//호텔 종류 배열로 받기
-	var accom_types = [];
-	$('input[name="accom_types"]:checked').each(function() {
-		accom_types.push($(this).val());
-	});
-	if (accom_types.length == 0) {
-		accom_types = [511, 513, 514, 515];
-	}
+
 
 	//호텔 종류 배열로 받기
 	var accom_types = [];
@@ -249,6 +244,7 @@
 	}; 
 
 	var str = "";
+
 	
 	//가격 포맷팅
 	function formatPrice(price){

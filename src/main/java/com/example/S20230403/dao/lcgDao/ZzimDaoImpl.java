@@ -10,78 +10,58 @@ import com.example.S20230403.model.Room_Img;
 import com.example.S20230403.model.Zzim;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class ZzimDaoImpl implements ZzimDao {
 	private final SqlSession session;
 
 	@Override
 	public int cgAjaxInsertZzim(Zzim zzim) {
-	//	System.out.println("cgAjaxInsertZzim 시작");
 		int result = 0;
 		try {
 			result = session.insert("cgAjaxInsertZzim", zzim);
 		} catch (Exception e) {
-		//	System.out.println("cgAjaxInsertZzim 에러-> "+e.getMessage());
-			// TODO: handle exception
+			log.error("dao cgAjaxInsertZzim 에러 -> {} ",e.getMessage());
 		}
 		return result;
 	}
 
 	@Override
-	public int cgAjaxDeleteZzim(Zzim zzim) {
-		//System.out.println("dao cgAjaxDeleteZzim 시작");
+	public int cgAjaxDeleteZzimByUserId(Zzim zzim) {
+		
 		int result = 0;
 		try {
-			result = session.delete("cgAjaxDeleteZzim", zzim);
-			//System.out.println("dao cgAjaxDeleteZzim result 1나와야돼 -> "+result);
+			result = session.delete("cgAjaxDeleteZzimByUserId", zzim);
 		} catch (Exception e) {
-			//System.out.println("cgAjaxDeleteZzim 에러 -> "+e.getMessage());
-			// TODO: handle exception
+			log.error("dao cgAjaxDeleteZzimByUserId 에러 -> {} ",e.getMessage());
 		}
 		return result;
 	}
-	// 상세숙소 페이지에서 찜한거 안한거 구분하기
-	@Override
-	public List<Zzim> getMyZzim(String user_id) {
-		//System.out.println("다오 getMyZzim 시작");
-		List<Zzim> myZzimLists = null;
-		try {
-			myZzimLists = session.selectList("getZzimLists", user_id);
-			//System.out.println("다오 getMyZzim 리스트-> "+myZzimLists.size());
-		} catch (Exception e) {
-			//System.out.println("다오 getMyZzim 에러 -> "+e.getMessage());
-			// TODO: handle exception
-		}
-		return myZzimLists;
-	}
+
 	// 유저 마이페이지에서 찜한 숙소만 가져오기 
 	@Override
-	public List<Accom> getMyAccomZzimListsByUser_id(String user_id) {
-		//System.out.println("dao getMyAccomZzimLists 시작");
+	public List<Accom> selectMyAccomZzimListsByUser_id(String user_id) {
+		
 		List<Accom> myAccomZzimLists = null;
 		try {
-			myAccomZzimLists = session.selectList("getMyAccomZzimListsByUser_id", user_id);
-			//System.out.println("dao getMyAccomZzimLists 사이즈 -> "+myAccomZzimLists.size());
+			myAccomZzimLists = session.selectList("selectMyAccomZzimListsByUser_id", user_id);
 		} catch (Exception e) {
-			//System.out.println("dao getMyAccomZzimLists 에러-> "+e.getMessage());
-			// TODO: handle exception
-			
+			log.error("dao selectMyAccomZzimListsByUser_id 에러 -> {} ",e.getMessage());
 		}
 		return myAccomZzimLists;
 	}
-	//// 유저 마이페이지에서 찜한 숙소 이미지만 가져오기 
+	// 유저 마이페이지에서 찜한 숙소 이미지만 가져오기 
 	@Override
-	public List<Room_Img> getMyZzimAccomImgsByUser_id(String user_id) {
-		//System.out.println("dao getMyZzimAccomImgsByUser_id 시작");
+	public List<Room_Img> selectMyZzimAccomImgListByUser_id(String user_id) {
+		
 		List<Room_Img> myZzimAccomImgsByUser_id = null;
 		try {
-			myZzimAccomImgsByUser_id = session.selectList("myZzimAccomImgsByUser_id", user_id);
-			//System.out.println("dao getMyZzimAccomImgsByUser_id 사이즈 -> "+myZzimAccomImgsByUser_id.size());
+			myZzimAccomImgsByUser_id = session.selectList("selectMyZzimAccomImgListByUser_id", user_id);
 		} catch (Exception e) {
-			//System.out.println("dao getMyZzimAccomImgsByUser_id 에러 -> "+e.getMessage());
-			// TODO: handle exception
+			log.error("dao selectMyZzimAccomImgListByUser_id 에러 -> {} ",e.getMessage());
 		}
 		return myZzimAccomImgsByUser_id;
 	}

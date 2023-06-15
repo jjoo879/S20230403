@@ -1,15 +1,16 @@
 package com.example.S20230403.dao.lcgDao;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-import org.apache.catalina.User;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.example.S20230403.model.Accom;
-import com.example.S20230403.model.Payment;
+
 import com.example.S20230403.model.Review;
 import com.example.S20230403.model.Review_Img;
 import com.example.S20230403.model.Room_Img;
@@ -19,87 +20,80 @@ import com.example.S20230403.model.Users;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class SellerReviewMgtDaoImpl implements SellerReviewMgtDao {
 	private final SqlSession session;
 	
 	@Override
-	public List<Accom> getMyAccoms(String sellerUser_id) {
-		//System.out.println("dao getmyaccoms 시작");
+	public List<Accom> selectMyAccomListBySellerUserId(String sellerUser_id) {
+		
 		List<Accom> myAccoms = null;
 		try {
-			myAccoms = session.selectList("getMyAccoms", sellerUser_id);
-			//System.out.println("dao getmyaccoms 사이즈 2나와야됨"+myAccoms.size());
+			myAccoms = session.selectList("selectMyAccomListBySellerUserId", sellerUser_id);
+			
 		} catch (Exception e) {
-			//System.out.println("dao getmyaccoms 에러 -> "+ e.getMessage());
-			// TODO: handle exception
+			log.error("dao selectMyAccomListBySellerUserId 에러 -> {} ",e.getMessage());
 		}
 		
 		return myAccoms;
 	}
 	
 	@Override
-	public List<Room_Img> getMyAccomsImg() {
+	public List<Room_Img> selectMyAccomsImg() {
 		//System.out.println("dao getMyaccomsimg 시작");
 		List<Room_Img> myAccomsImgs = null;
 		try {
-			myAccomsImgs = session.selectList("cgGetRoom_img");
+			myAccomsImgs = session.selectList("cgSelectRoom_imgList");
 		} catch (Exception e) {
-			//System.out.println("dao getMyaccomsimg 에러-> "+e.getMessage());
-			// TODO: handle exception
+			log.error("dao selectMyAccomsImg 에러 -> {} ",e.getMessage());
 		}
 		return myAccomsImgs;
 	}
 
 
 	@Override
-	public List<Accom> getMyInfo(String biz_id) {
-		///System.out.println("dao getMyInfo 시작");
+	public List<Accom> selectMyInfoDetailByBizId(String biz_id) {
+		
 		List<Accom> myInfo = null;
 		try {
-			myInfo = session.selectList("getMyInfo", biz_id);
-			//System.out.println("dao getMyInfo ->" +myInfo);
+			myInfo = session.selectList("selectMyInfoDetailByBizId", biz_id);
 		} catch (Exception e) {
-			//System.out.println("dao getMyInfo 에러-> "+e.getMessage());
-			// TODO: handle exception
+			log.error("dao selectMyInfoDetailByBizId 에러 -> {} ",e.getMessage());
 		}
 		return myInfo;
 	}
 
 	@Override
-	public List<Review> getMyReviews(Review review) {
-		//System.out.println("다오 getMyReviews 시작");
+	public List<Review> selectMyReviewListByBizId(Review review) {
 		List<Review> myReviews = null;
 		try {
-			myReviews = session.selectList("getMyReviews", review);
-			//System.out.println("다오 getMyReviews 사이즈 -> "+ myReviews.size());
+			myReviews = session.selectList("selectMyReviewListByBizId", review);
 		} catch (Exception e) {
-			//System.out.println("다오 getMyReviews 에러 -> "+ e.getMessage());
-			// TODO: handle exception
+			log.error("dao selectMyReviewListByBizId 에러 -> {} ",e.getMessage());
 		}
 		return myReviews;
 	}
 
 	@Override
-	public Users getUserNicknames(String user_id) {
-		//System.out.println("dao getuserNicname 시작");
+	public Users selectUserNicknameDetailByUserId(String user_id) {
+
 		Users userNicknames = null;
 		try {
-			userNicknames = session.selectOne("getUserNicknames", user_id);
+			userNicknames = session.selectOne("selectUserNicknameDetailByUserId", user_id);
 		} catch (Exception e) {
-			// TODO: handle exception
+			log.error("dao selectUserNicknameDetailByUserId 에러 -> {} ",e.getMessage());
 		}
 		return userNicknames;
 	}
 
 	@Override
-	public List<Review_Img> getReviewImgs(int pay_id) {
-		//System.out.println("dao getReviewImgs 시작");
+	public List<Review_Img> selectReviewImgListByPayId(int pay_id) {
+	
 		List<Review_Img> review_imgs = null;
 		try {
-			review_imgs = session.selectList("getReviewImgs", pay_id);
+			review_imgs = session.selectList("selectReviewImgListByPayId", pay_id);
 		} catch (Exception e) {
-			System.out.println("dao getReviewImgs 에러-> "+e.getMessage());
-			// TODO: handle exception
+			log.error("dao selectReviewImgListByPayId 에러 -> {} ",e.getMessage());
 		}
 		return review_imgs;
 	}
@@ -107,43 +101,36 @@ public class SellerReviewMgtDaoImpl implements SellerReviewMgtDao {
 
 	@Override
 	public int updateReviewDelRequestByPayId(Review review) {
-		//System.out.println("dao updateReviewDelRequestByPayId 시작");
+	
 		int resultRequest = 0;
 		try {
 			resultRequest = session.update("updateReviewDelRequestByPayId", review);
-			//System.out.println("dao updateReviewDelRequestByPayId result 1나와야됨-> "+resultRequest);
+		
 		} catch (Exception e) {
-			//System.out.println("dao updateReviewDelRequestByPayId 에러 -> "+e.getMessage());
-			// TODO: handle exception
+			log.error("dao updateReviewDelRequestByPayId 에러 -> {} ",e.getMessage());
 		}
 		return resultRequest;
 	}
 
 	@Override
-	public Review getMyReviewConut(String biz_id) {
-	//	System.out.println("dao getMyReviewConut 시작");
+	public Review selectMyReviewConutByBizId(String biz_id) {
 		Review totalReviewAndBiz_id = null;
 		try {
-			totalReviewAndBiz_id = session.selectOne("getMyReviewConut", biz_id);
-		//	System.out.println("getMyReviewConut resultCount -> "+totalReviewAndBiz_id);
+			totalReviewAndBiz_id = session.selectOne("selectMyReviewConutByBizId", biz_id);
 		} catch (Exception e) {
-			System.out.println("dao getMyReviewConut 에러 -> "+e.getMessage());
-			// TODO: handle exception
+			log.error("dao selectMyReviewConutByBizId 에러 -> {} ",e.getMessage());
 		}
 		return totalReviewAndBiz_id;
 	}
 	
 	// ajax
 	@Override
-	public List<Review> cgGetAjaxSortingReviewLists(Review review) {
-		//System.out.println("dao cgGetAjaxSortingReviewLists 시작");
+	public List<Review> cgSelectAjaxSortingReviewListsByBizIdAndKind(Review review) {
 		List<Review> ajaxReviewSortingLists = null;
 		try {
-			ajaxReviewSortingLists = session.selectList("cgGetAjaxSortingReviewLists", review);
-			//System.out.println("dao cgGetAjaxSortingReviewLists 사이즈 2개 나와야됨-> "+ajaxReviewSortingLists.size());
+			ajaxReviewSortingLists = session.selectList("cgSelectAjaxSortingReviewListsByBizIdAndKind", review);
 		} catch (Exception e) {
-			//System.out.println("dao cgGetAjaxSortingReviewLists 에러 0-> "+e.getMessage());
-			// TODO: handle exception
+			log.error("dao cgSelectAjaxSortingReviewListsByBizIdAndKind 에러 -> {} ",e.getMessage());
 		}
 		return ajaxReviewSortingLists;
 	}

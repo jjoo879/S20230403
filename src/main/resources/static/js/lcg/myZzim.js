@@ -7,8 +7,9 @@ function cgAjaxDeleteZzim(biz_id, user_id, auth){
 	
 	// insert 하는 ajax
 	$.ajax({
-		url : "/cgAjaxDeletetZzim",
+		url : "/productList/myzzim/"+user_id,
 		dataType : "json",
+		type : "DELETE",
 		data : { 
 			"biz_id" : biz_id,
 			"user_id" : user_id,
@@ -95,7 +96,7 @@ function formatPrice(price){
 
 // 버튼 클릭 시 ajax 호출
 $.ajax({
-	url : "/cgAjaxZzimListsByUser_id",
+	url : "/commonUser/myzzim/"+user_id,
 	data : {
 			"user_id":user_id
 		    },

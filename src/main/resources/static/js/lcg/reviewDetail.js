@@ -30,7 +30,7 @@ function checkLength(index) {
 		var biz_id = biz_id;
 		
 		$.ajax({
-			url : "/cgGetAjaxSortingReviewLists",
+			url : "/biz/review/detail/biz-id/sorting",
 			data : {
 				"kind" 	 : kind,
 				"biz_id" : biz_id
@@ -53,7 +53,6 @@ function checkLength(index) {
 					str += "<div class = 'accomReviewNicknameAndDate'>";
 					str += "<span id='reviewBizName'>" + this.biz_name + "</span><p>";
 					str += "<span>" +this.nickname + "님 | </span>";
-					str += "<span>" +this.del_request_count + "님 | </span>";
 					str += "<span>" +formatDate+"</span>";
 					str += "</div>";
 					str += "<div class = 'accomReviewRoomName'>";
@@ -97,7 +96,7 @@ function checkLength(index) {
 					str += "<div class='modal fade' id='staticBackdrop" + index + "' data-bs-backdrop='static' data-bs-keyboard='false' tabindex='-1' aria-labelledby='staticBackdropLabel' aria-hidden='true'>";
 					str += "<div class='modal-dialog'>";
 					str += "<div class='modal-content'>";
-					str += "<form action='/biz/reviewDeleteRequest' method='post' name='frm' onsubmit='return chk(" + index + ")'>";
+					str += "<form action='/biz/review/delete-request' method='post' name='frm' onsubmit='return chk(" + index + ")'>";
 					str += "<div class='modal-header'>";
 					str += "<h1 class='modal-title fs-5' id='staticBackdropLabel'>리뷰삭제요청</h1>";
 					str += "<span id='modal-notice'>(리뷰삭제는 관리자가 판단하고 삭제하므로 5일 이상 소요됩니다.)</span>";
