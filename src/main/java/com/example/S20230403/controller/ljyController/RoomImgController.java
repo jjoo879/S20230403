@@ -58,8 +58,6 @@ public class RoomImgController {
 	@PostMapping(value = "/biz/roomImgInsert")
 	public String roomImgInsert(MultipartFile[] files, Model model, Room room,
 								HttpServletRequest request) throws Exception {
-		//System.out.println("RoomImgController roomImgInsert 시작...");
-		//System.out.println("RoomImgController roomImgInsert files.length -> "+files.length);
 		
 		File convertFile = null;
 		String rootPath = uploadPath.substring(0, uploadPath.lastIndexOf("\\img\\room\\"));
@@ -74,23 +72,17 @@ public class RoomImgController {
 				String savedName = uploadFile(file.getBytes(), room, extension);
 				// 실제 파일 저장, 컨택스트패스+추출한 파일명으로 
 				convertFile = new File(rootPath + savedName);
-				//System.out.println("RoomImgController roomImgInsertForm savedName -> "+savedName);
-				//System.out.println("RoomImgController roomImgInsert convertFile -> "+convertFile);
-
 				file.transferTo(convertFile);
 				
 				}
 		}
 		
-		// 이미지 저장을 끝내고 사용자에게 보여줄 모델들과 함께 객실확인페이지로
-		// 객실확인페이지에는 객실이미지 출력, 해당 객실 의 정보 모두 가져가야함 room room_img
 		room = ss.roomSelect(room);
 		room.r_priceFormating(room.getR_price());
 		Room_Img ri = new Room_Img();
 		ri.setBiz_id(room.getBiz_id());
 		ri.setR_id(room.getR_id());
 		List<Room> riList = ss.selectRoomImgList(ri);
-		//System.out.println("RoomImgController roomSelectForm riList -> "+riList);
 		
 		model.addAttribute("riList", riList);
 		model.addAttribute("room", room);
@@ -100,19 +92,15 @@ public class RoomImgController {
 	}
 	
 	// sql문 2개 사용중, 이미지 이름 추출하기 위한 메소드
-	private String uploadFile(byte[] fileData, Room room, String extension) throws Exception {
-		//System.out.println("RoomImgController uploadFile 메소드 실행");
-		
+	private String uploadFile(byte[] fileData, Room room, String extension) throws Exception {	
 		String extractPath = uploadPath.substring(uploadPath.lastIndexOf("\\img\\room\\"));
-		
 		// 폴더 없으면 폴더 생성
 		File fileDirectory = new File(uploadPath);
 		if (!fileDirectory.exists()) {
 			// 신규 폴더(Directory) 생성 
 			fileDirectory.mkdirs();
 			//System.out.println("8.업로드용 폴더 생성 : " + uploadPath);
-		}
-		
+		}		
 		// room_img의 복합키중 하나인 r_id 는 이미지가 하나씩 추가될 때마가 1씩 증가해야됨
 		int imgNum = ss.getImgNum(room);
 		imgNum +=1;
@@ -120,19 +108,10 @@ public class RoomImgController {
 		// 저장명은 = 컨택스트 경로 + 해당객실 사업자등록번호 + 방번호 + 이미지번호 + 확장자명
 		// 따라서 뷰에서 이미지를 호출할 때에는 r_img 컬럼만을 사용해서 호출이 가능해진다....
 		String savedName = extractPath+ room.getBiz_id()+room.getR_id()+imgNum+"."+extension;
-		//System.out.println("RoomImgController uploadFile savedName -> "+savedName);
-		
-		// 로직을 바꿔서 더이상 사용하지 않음
-		/*
-		 * File target = new File(imgPath, savedName); FileCopyUtils.copy(fileData,
-		 * target);
-		 */
-		//convertFile = new File(rootPath+savedName);
 		
 		// DB에 저장하는 로직, DB저장 후 savedName을 리턴시켜 그것으로 파일을 저장한다
 		room.setR_img_id(imgNum);
 		room.setR_img(savedName);
-		//System.out.println("RoomImgController uploadFile 메소드 room -> "+room);
 		ss.roomImgInsert(room);
 		return savedName;
 	}

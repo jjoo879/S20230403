@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BizUserController {
 	
 	private final SukbakService ss01;
-	//에러 페이지로 던지기
+	
 	@ExceptionHandler
 	public String exceptionThrows(Exception e, Model model) {
 		String exception = e.toString();
@@ -80,13 +80,8 @@ public class BizUserController {
 	@PostMapping(value = "/biz/accomMngChk")
 	public String accomMng(Accom accom, 
 						   @RequestParam(value = "accomMngChk") String accomMngChk,
-						   Model model) {
-		//System.out.println("비즈컨트롤러01 accomMng start...");
-		//System.out.println("accomMngChk -> "+accomMngChk);
-		//System.out.println("accom ->"+accom.toString());
-		
+						   Model model) {	
 		String biz_id = accom.getBiz_id();
-		//System.out.println("biz_id -> "+biz_id);
 		accom = ss01.accomSelect(biz_id);
 		String user_id = accom.getUser_id();
 		model.addAttribute("biz_id", biz_id);
@@ -94,43 +89,33 @@ public class BizUserController {
 		List<Room_Img> accomRoomImgList = ss01.selectAccomAllRoomImgList(biz_id);
 		switch (accomMngChk) {
 		case "상세확인":
-			//System.out.println("비즈컨트롤러01 accomMng 상세확인 case");
-			// 아이디로 로우 하나 가져옴
 			ss01.updateRoomCount(biz_id, "update");
-			////System.out.println("accom -> "+accom.toString());
 			model.addAttribute("accom", accom);
 			model.addAttribute("accomRoomImgList", accomRoomImgList);
 			return "/views/biz/accomSelectForm";
 		case "수정":
-			////System.out.println("비즈컨트롤러01 accomMng 수정 case");
-			//바로 수정은 안하지만 로우를 가져와야함 따라서 위 로직 같이 사용
 			model.addAttribute("accom", accom);
 			return "/views/biz/accomUpdateForm";
 		case "숨기기":
-			////System.out.println("비즈컨트롤러01 accomMng 숨기기 case");
 			ss01.accomStatus(accom, "hidden");
 			accomList = ss01.accomList(biz_id);
 			model.addAttribute("accomList", accomList);
 			return "redirect:/biz/bizMain";
 		case "숨김해제":
-			////System.out.println("비즈컨트롤러01 accomMng 숨김해제 case");
 			ss01.accomStatus(accom, "open");
 			accomList = ss01.accomList(biz_id);
 			model.addAttribute("accomList", accomList);
 			return "redirect:/biz/bizMain";
 		case "삭제":
-			////System.out.println("비즈컨트롤러01 accomMng 삭제 case");
 			ss01.accomStatus(accom, "delete");
 			accomList = ss01.accomList(biz_id);
 			model.addAttribute("accomList", accomList);
 			return "redirect:/biz/bizMain";
 		case "객실조회":
-			////System.out.println("비즈컨트롤01 accomMng 객실조회 case");
 			accom = ss01.accomSelect(biz_id);
 			List<Room> roomList = ss01.roomListSelectWithAccom(biz_id);
 			// 각 room에 가격 포매팅해줌..
 			for (Room room :roomList ) {
-				////System.out.println("비즈컨트롤01 rooms accom->"+room);
 				room.setR_formatPrice(room.r_priceFormating(room.getR_price())); 
 			}
 			model.addAttribute("roomList", roomList);
